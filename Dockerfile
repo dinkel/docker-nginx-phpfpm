@@ -16,7 +16,7 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
     ln -sf /dev/stderr /var/log/nginx/error.log && \
     ln -sf /dev/stderr /var/log/php-fpm.log
 
-RUN rm -rf /var/www/*
+RUN rm -rf /var/www/
 
 COPY nginx.conf /etc/nginx/
 
