@@ -6,7 +6,8 @@ ENV NGINX_VERSION 1.6.2-5
 ENV PHP_VERSION 5.6.9+dfsg-0+deb8u1
 
 RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
+        ca-certificates \
         nginx=${NGINX_VERSION} \
         php5-fpm=${PHP_VERSION} && \
     apt-get clean && \
