@@ -3,7 +3,7 @@ FROM debian:jessie
 MAINTAINER Christian Luginbühl <dinkel@pimprecords.com>
 
 ENV NGINX_VERSION 1.6.2-5
-ENV PHP_VERSION 5.6.9+dfsg-0+deb8u1
+ENV PHP_VERSION 5.6.13+dfsg-0+deb8u1
 
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
