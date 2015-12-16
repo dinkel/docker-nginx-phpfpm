@@ -2,14 +2,14 @@ FROM debian:jessie
 
 MAINTAINER Christian Luginbühl <dinkel@pimprecords.com>
 
-ENV NGINX_VERSION 1.6.2-5
-ENV PHP_VERSION 5.6.13+dfsg-0+deb8u1
+ENV NGINX_VERSION 1.6.2
+ENV PHP_VERSION 5.6.14
 
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
         ca-certificates \
-        nginx=${NGINX_VERSION} \
-        php5-fpm=${PHP_VERSION} && \
+        nginx=${NGINX_VERSION}* \
+        php5-fpm=${PHP_VERSION}* && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
