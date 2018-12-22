@@ -1,27 +1,21 @@
-#!/bin/bash
-set -m
+#!/bin/sh
 
-php5-fpm &
-nginx &
+php-fpm7.0
+nginx
 
-pids=`jobs -p`
+pidfile_phpfpm="/run/php/php7.0-fpm.pid"
+pidfile_nginx="/run/nginx.pid"
 
-exitcode=0
+while : ; do
+    if ! pgrep -F $pidfile_phpfpm > /dev/null 2>&1; then
+        echo "Daemon process php-fpm7.0 died!"
+        exit 1
+    fi
 
-function terminate() {
-    trap "" CHLD
-    
-    for pid in $pids; do
-        if ! kill -0 $pid 2>/dev/null; then
-            wait $pid
-            exitcode=$?
-        fi
-    done
+    if ! pgrep -F $pidfile_nginx > /dev/null 2>&1; then
+        echo "Daemon process nginx died!"
+        exit 1
+    fi
 
-    kill $pids 2>/dev/null
-}
-
-trap terminate CHLD
-wait
-
-exit $exitcode
+    sleep 5
+done

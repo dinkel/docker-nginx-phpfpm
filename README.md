@@ -30,14 +30,13 @@ The intended way to use this image is as the first line in a `Dockerfile`:
 
     FROM dinkel/nginx-phpfpm
 
-Then rewrite one or more of the files
+If necessary you can rewrite the `default` file if you have sepcial needs 
+for the http server definition. I updated the original `fastcgi-php.conf`
+snippet, so that in the `server` block of the nginx definition you only
+need to include this snippet and all PHP FastCGI forwarding is handeled 
+for you (i.e. no need to deal with the special `location` definition 
+for PHP scripts.
 
-    default.conf (`server` section(s) for Nginx configuration)
-    www.conf (configuration for phpfpm)
-    nginx.conf (base configuration for Nginx)
-
-and add your web application.
-    
 Configuration (environment variables)
 -------------------------------------
 
@@ -59,11 +58,4 @@ belief, that there shouldn't be yet another process manager (Docker has one,
 CoreOS has one (with `fleet` and `systemd`).
 
 The only thing this script does is watching its forked (background) processes
-and as soon as one dies, it terminates all the others and exits with the code 
-of the first dying process.
-
-Todo
-----
-
-* Make sure my little script above works in all circumstances. I know that when
-  omitting the `-d` one cannot stop the process using `<Ctrl><c>`.
+and as soon as one dies.

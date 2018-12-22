@@ -1,0 +1,18 @@
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root /var/www;
+
+    server_name _;
+
+    location / {
+        index index.html index.htm index.php;
+    }
+
+    location ~ /\.ht {
+        deny  all;
+    }
+
+    include snippets/fastcgi-php.conf;
+}
